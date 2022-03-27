@@ -1,0 +1,40 @@
+.container {
+  padding: 2rem 0;
+
+  .table-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+
+    :last-child {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
+  ::ng-deep {
+    .mat-form-field-flex {
+      width: 60px;
+    }
+
+    .ngx-datatable {
+      .datatable-row-even {
+        background: #fafafa;
+      }
+
+      .datatable-row-odd {
+        background: #f2f2f2;
+      }
+
+      .exads-inactive .datatable-body-cell-label {
+        color: red;
+      }
+
+      .exads-active .datatable-body-cell-label {
+        color: green;
+      }
+    }
+  }
+}
