@@ -7,22 +7,22 @@ import {
   MatSelectModule,
 } from "@angular/material";
 
-import { NgxDatatableModule } from "@swimlane/ngx-datatable";
+import { TableModule } from "../lib/table/table.module";
 
 import { UsersComponent } from "./users.component";
 import { UsersService } from "./users.service";
-import { ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [UsersComponent],
   imports: [
+    BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,
-    NgxDatatableModule,
-    ReactiveFormsModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatButtonModule,
-    MatSelectModule
+    TableModule
   ],
   providers: [UsersService],
 })

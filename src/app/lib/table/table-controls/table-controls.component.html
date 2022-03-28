@@ -1,0 +1,16 @@
+<section class="table-controls">
+  <span>
+    <ng-content></ng-content>
+  </span>
+
+  <span class="page-size-control">
+    <mat-form-field name="pagesize">
+      <mat-select (selectionChange)="getData()" [(value)]="limit">
+        <mat-option *ngFor="let size of pageSizes" [value]="size">
+          {{ size }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <label for="pagesize">rows</label>
+  </span>
+</section>

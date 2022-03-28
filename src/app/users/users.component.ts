@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { take, tap } from "rxjs/operators";
+
+import { PageModel } from "../lib/table/table.model";
 import { User } from "./user.model";
 import { UsersService } from "./users.service";
 
@@ -13,18 +15,13 @@ export class UsersComponent implements OnInit {
     { prop: "username", name: "Username" },
     { prop: "full_name", name: "Full Name" },
     { name: "Email" },
-    {
-      name: "Status",
-      cellClass: (status) => ` exads-${status.value.toLowerCase()}`,
-    },
+    { name: "Status", cellClass: this.setStatusCellClass },
     { prop: "created_date", name: "Date Created" },
   ];
-
   rows: User[];
+
   count: number;
-  pageSizes = [10, 20, 50, 70, 100];
-  page = 0;
-  limit = 20;
+  page: PageModel = { page: 0, limit: 20 };
   loading = false;
 
   constructor(private usersService: UsersService) {}
@@ -33,10 +30,20 @@ export class UsersComponent implements OnInit {
     this.getUsers();
   }
 
-  getUsers() {
+  changePageSize(limit: number) {
+    this.page.limit = limit;
+    this.getUsers();
+  }
+
+  setPage(page: PageModel) {
+    this.page = page;
+    this.getUsers();
+  }
+
+  private getUsers() {
     this.loading = true;
     this.usersService
-      .getUsers({ page: this.page, limit: this.limit })
+      .getUsers({ ...this.page })
       .pipe(
         tap(({ users, count }) => {
           this.rows = users;
@@ -48,29 +55,7 @@ export class UsersComponent implements OnInit {
       .subscribe();
   }
 
-  // TODO: move following logic into a separate table.component.ts
-  setPage(pageInfo) {
-    this.page = pageInfo.offset;
-    this.getUsers()
-  }
-
-  onSort(event) {
-    // event was triggered, start sort sequence
-    console.log('Sort Event', event);
-    this.loading = true;
-    // emulate a server request with a timeout
-    setTimeout(() => {
-      const rows = [...this.rows];
-      // this is only for demo purposes, normally
-      // your server would return the result for
-      // you and you would just set the rows prop
-      const sort = event.sorts[0];
-      rows.sort((a, b) => {
-        return a[sort.prop].localeCompare(b[sort.prop]) * (sort.dir === 'desc' ? -1 : 1);
-      });
-
-      this.rows = rows;
-      this.loading = false;
-    }, 1000);
+  private setStatusCellClass(status): string {
+    return ` exads-${status.value.toLowerCase()}`;
   }
 }

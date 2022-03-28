@@ -1,37 +1,17 @@
 <div class="container">
-  <section class="table-controls">
-    <span>
-      <button mat-flat-button color="primary">NEW USER</button>
-    </span>
+  <exads-table-controls
+    [limit]="page.limit"
+    (pageSizeEvent)="changePageSize($event)"
+  >
+    <button mat-flat-button color="primary">NEW USER</button>
+  </exads-table-controls>
 
-    <span>
-      <mat-form-field name="pagesize">
-        <mat-select (selectionChange)="getUsers()" [(value)]="limit">
-          <mat-option *ngFor="let size of pageSizes" [value]="size">
-            {{ size }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <label for="pagesize">rows</label>
-    </span>
-  </section>
-
-  <ngx-datatable
-    class="material"
-    rowHeight="auto"
-    columnMode="force"
+  <exads-table
     [columns]="columns"
     [rows]="rows"
-    [headerHeight]="50"
-    [footerHeight]="50"
-    [externalPaging]="true"
-    [externalSorting]="true"
+    [page]="page"
     [count]="count"
-    [offset]="page"
-    [limit]="limit"
-    [loadingIndicator]="loading"
-    (page)="setPage($event)"
-    (sort)="onSort($event)"
-  >
-  </ngx-datatable>
+    [loading]="loading"
+    (changePageEvent)="setPage($event)"
+  ></exads-table>
 </div>

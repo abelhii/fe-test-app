@@ -1,0 +1,19 @@
+::ng-deep {
+  .ngx-datatable {
+    .datatable-row-even {
+      background: #fafafa;
+    }
+
+    .datatable-row-odd {
+      background: #f2f2f2;
+    }
+
+    .exads-inactive .datatable-body-cell-label {
+      color: red;
+    }
+
+    .exads-active .datatable-body-cell-label {
+      color: green;
+    }
+  }
+}
