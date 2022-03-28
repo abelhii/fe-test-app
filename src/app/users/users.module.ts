@@ -9,20 +9,21 @@ import {
 
 import { TableModule } from "../lib/table/table.module";
 
+import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from "./users.component";
 import { UsersService } from "./users.service";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AddNewUserComponent } from './add-new-user/add-new-user.component';
 
 @NgModule({
-  declarations: [UsersComponent],
+  declarations: [UsersComponent, AddNewUserComponent],
   imports: [
-    BrowserAnimationsModule,
+    UsersRoutingModule,
     CommonModule,
     HttpClientModule,
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
-    TableModule
+    TableModule,
   ],
   providers: [UsersService],
 })
