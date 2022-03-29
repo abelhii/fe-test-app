@@ -1,9 +1,9 @@
 <div class="container">
-  <h2>Add New User</h2>
+  <h2>{{ "Add New User" }}</h2>
   <form [formGroup]="addUserForm" (ngSubmit)="addNewUser()">
     <section class="add-new-user-form">
       <mat-form-field appearance="standard">
-        <mat-label>Username</mat-label>
+        <mat-label>{{ "Username" }}</mat-label>
         <input matInput type="text" formControlName="username" />
         <mat-error *ngIf="addUserForm.controls.username.invalid">
           {{ getErrorMessage("username") }}
@@ -12,7 +12,7 @@
 
       <span class="fullname">
         <mat-form-field appearance="standard">
-          <mat-label>First Name</mat-label>
+          <mat-label>{{ "First Name" }}</mat-label>
           <input matInput type="text" formControlName="first_name" />
           <mat-error *ngIf="addUserForm.controls.first_name.invalid">
             {{ getErrorMessage("first_name") }}
@@ -20,13 +20,13 @@
         </mat-form-field>
 
         <mat-form-field appearance="standard">
-          <mat-label>Last Name (Optional)</mat-label>
+          <mat-label>{{ "Last Name (Optional)" }}</mat-label>
           <input matInput type="text" formControlName="last_name" />
         </mat-form-field>
       </span>
 
       <mat-form-field appearance="standard">
-        <mat-label>Email</mat-label>
+        <mat-label>{{ "Email" }}</mat-label>
         <input matInput type="text" formControlName="email" />
         <mat-error *ngIf="addUserForm.controls.email.invalid">
           {{ getErrorMessage("email") }}
@@ -41,7 +41,7 @@
         type="button"
         routerLink="/users"
       >
-        CANCEL
+        {{ "CANCEL" }}
       </button>
       <button
         mat-flat-button
@@ -49,7 +49,7 @@
         type="submit"
         [disabled]="!addUserForm.valid"
       >
-        ADD NEW USER
+        {{ "ADD NEW USER" }}
       </button>
     </footer>
   </form>

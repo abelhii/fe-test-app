@@ -37,11 +37,10 @@
       let-curPage="curPage"
       let-offset="offset"
     >
-      <div style="padding: 5px 10px">
-        <div>
-          Showing {{ curPage }} - {{ pageSize }} / {{ rowCount }} entries
-        </div>
-      </div>
+      <span>
+        {{ "Showing" }} {{ curPage }} - {{ pageSize }} / {{ rowCount }}
+        {{ "entries" }}
+      </span>
 
       <datatable-pager
         [pagerLeftArrowIcon]="'datatable-icon-left'"
@@ -51,7 +50,7 @@
         [page]="curPage"
         [size]="pageSize"
         [count]="rowCount"
-        [hidden]="!((rowCount / pageSize) > 1)"
+        [hidden]="!(rowCount / pageSize > 1)"
         (change)="datatable.onFooterPage($event)"
       >
       </datatable-pager>
