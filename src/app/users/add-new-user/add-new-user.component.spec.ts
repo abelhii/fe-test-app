@@ -1,16 +1,31 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from "@angular/common/http";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule, MatInputModule } from "@angular/material";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { RouterTestingModule } from "@angular/router/testing";
 
-import { AddNewUserComponent } from './add-new-user.component';
+import { UsersService } from "../users.service";
 
-describe('AddNewUserComponent', () => {
+import { AddNewUserComponent } from "./add-new-user.component";
+
+describe("AddNewUserComponent", () => {
   let component: AddNewUserComponent;
   let fixture: ComponentFixture<AddNewUserComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddNewUserComponent ]
-    })
-    .compileComponents();
+      declarations: [AddNewUserComponent],
+      imports: [
+        BrowserAnimationsModule,
+        RouterTestingModule.withRoutes([]),
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+      ],
+      providers: [UsersService],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +34,17 @@ describe('AddNewUserComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
+  });
+
+  it("should call console.error and window.alert on handleError ", () => {
+    const error = { error: { message: "error message" } };
+    const consoleError = spyOn(console, "error");
+    const alert = spyOn(window, "alert");
+    component["handleError"](error);
+
+    expect(consoleError).toHaveBeenCalledTimes(1);
+    expect(alert).toHaveBeenCalledTimes(1);
   });
 });

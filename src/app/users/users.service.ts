@@ -1,8 +1,8 @@
-import { HttpClient, HttpParams, HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 import { Observable, of } from "rxjs";
-import { catchError, map, tap } from "rxjs/operators";
+import { catchError, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 
 import { User, UserResponse, UserStatus } from "./user.model";
@@ -26,6 +26,20 @@ export class UsersService {
       );
   }
 
+  doesUsernameExist(username: string): Observable<boolean> {
+    const params = new HttpParams({ fromObject: { username } });
+    return this.http.get<boolean>(`${this.url}`, { params }).pipe(
+      map((res: any) => res.data.count > 0),
+      catchError(this.handleError("checkUsername", null))
+    );
+  }
+
+  addNewUser(user: User) {
+    return this.http.post(`${this.url}`, {
+      user: { ...user, id_status: UserStatus.Active },
+    });
+  }
+
   private defineUser(user: User): User {
     return {
       ...user,
@@ -40,7 +54,7 @@ export class UsersService {
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      console.log(`${operation} failed: ${error.message}`);
+      alert(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
   }

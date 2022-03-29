@@ -1,6 +1,7 @@
 export interface UserResponse {
   count: number;
   users: User[];
+  message?: string;
 }
 
 export interface User {

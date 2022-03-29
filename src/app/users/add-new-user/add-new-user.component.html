@@ -1,1 +1,56 @@
-<p>add-new-user works!</p>
+<div class="container">
+  <h2>Add New User</h2>
+  <form [formGroup]="addUserForm" (ngSubmit)="addNewUser()">
+    <section class="add-new-user-form">
+      <mat-form-field appearance="standard">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" formControlName="username" />
+        <mat-error *ngIf="addUserForm.controls.username.invalid">
+          {{ getErrorMessage("username") }}
+        </mat-error>
+      </mat-form-field>
+
+      <span class="fullname">
+        <mat-form-field appearance="standard">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" formControlName="first_name" />
+          <mat-error *ngIf="addUserForm.controls.first_name.invalid">
+            {{ getErrorMessage("first_name") }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Last Name (Optional)</mat-label>
+          <input matInput type="text" formControlName="last_name" />
+        </mat-form-field>
+      </span>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Email</mat-label>
+        <input matInput type="text" formControlName="email" />
+        <mat-error *ngIf="addUserForm.controls.email.invalid">
+          {{ getErrorMessage("email") }}
+        </mat-error>
+      </mat-form-field>
+    </section>
+
+    <footer class="flex">
+      <button
+        mat-flat-button
+        class="cancel-btn"
+        type="button"
+        routerLink="/users"
+      >
+        CANCEL
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="!addUserForm.valid"
+      >
+        ADD NEW USER
+      </button>
+    </footer>
+  </form>
+</div>
