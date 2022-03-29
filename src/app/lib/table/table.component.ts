@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from "@angular/core";
 import { PageModel } from "./table.model";
 
 @Component({
@@ -8,8 +13,8 @@ import { PageModel } from "./table.model";
 })
 export class TableComponent {
   @Input() page: PageModel = { page: 0, limit: 20 };
-  @Input() columns: unknown[];
-  @Input() rows: unknown[];
+  @Input() columns: Object[];
+  @Input() rows: Object[];
   @Input() count: number;
   @Input() loading = false;
 

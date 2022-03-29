@@ -77,9 +77,7 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
       .doesUsernameExist(username)
       .pipe(catchError(this.handleError), take(1))
       .subscribe((usernameExists) => {
-        if (!usernameExists) {
-          return this.usersService.addNewUser(this.addUserForm.value);
-        } else {
+        if (usernameExists) {
           this.addUserForm.controls.username.setErrors({
             usernameExists: true,
           });
@@ -92,6 +90,10 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
 
     if (control.hasError("required")) {
       return `You must enter a value for ${controlName}`;
+    }
+
+    if (control.hasError("pattern")) {
+      return `Invalid character in username`;
     }
 
     if (control.hasError("usernameExists")) {

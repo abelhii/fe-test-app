@@ -1,11 +1,12 @@
 <ngx-datatable
+  #datatable
   class="material"
   rowHeight="auto"
   columnMode="force"
-  [columns]="columns"
   [rows]="rows"
   [headerHeight]="50"
   [footerHeight]="50"
+  [scrollbarH]="true"
   [externalPaging]="true"
   [count]="count"
   [offset]="page.page"
@@ -13,4 +14,47 @@
   [loadingIndicator]="loading"
   (page)="setPage($event)"
 >
+  <ngx-datatable-column
+    *ngFor="let col of columns"
+    name="col.name"
+    [minWidth]="150"
+  >
+    <ng-template let-column="column" ngx-datatable-header-template>
+      {{ col.name }}
+    </ng-template>
+
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{ row[col.prop ? col.prop : col.name.toLowerCase()] }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-footer>
+    <ng-template
+      ngx-datatable-footer-template
+      let-rowCount="rowCount"
+      let-pageSize="pageSize"
+      let-selectedCount="selectedCount"
+      let-curPage="curPage"
+      let-offset="offset"
+    >
+      <div style="padding: 5px 10px">
+        <div>
+          Showing {{ curPage }} - {{ pageSize }} / {{ rowCount }} entries
+        </div>
+      </div>
+
+      <datatable-pager
+        [pagerLeftArrowIcon]="'datatable-icon-left'"
+        [pagerRightArrowIcon]="'datatable-icon-right'"
+        [pagerPreviousIcon]="'datatable-icon-prev'"
+        [pagerNextIcon]="'datatable-icon-skip'"
+        [page]="curPage"
+        [size]="pageSize"
+        [count]="rowCount"
+        [hidden]="!((rowCount / pageSize) > 1)"
+        (change)="datatable.onFooterPage($event)"
+      >
+      </datatable-pager>
+    </ng-template>
+  </ngx-datatable-footer>
 </ngx-datatable>

@@ -1,5 +1,7 @@
 ::ng-deep {
-  .ngx-datatable {
+  .ngx-datatable.material {
+    box-shadow: 0px -1px 0px 0px #ebebeb;
+
     .datatable-row-even {
       background: #fafafa;
     }
@@ -14,6 +16,27 @@
 
     .exads-active .datatable-body-cell-label {
       color: green;
+    }
+
+    .datatable-scroll {
+      width: 100%;
+    }
+
+    .datatable-footer {
+      padding: 1rem;
+      .datatable-footer-inner {
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+@media (min-width: 450px) {
+  ::ng-deep {
+    .ngx-datatable.material {
+      .datatable-footer .datatable-footer-inner {
+        flex-direction: row;
+      }
     }
   }
 }

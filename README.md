@@ -4,7 +4,7 @@
 
 The general approach to create a scalable application was to create a component driven architecture as outlined below.
 
-This approach splits reuseable components (app/lib) into their own modules and having business features (app/user) as separate modules that consume these reuseable modules.
+This approach splits reuseable components (`app/lib`) into their own modules and having business features (`app/user`) as separate modules that consume these reuseable modules.
 
 While this creates more files overall, it makes each component easier to maintain, test and simplifies the code needed to reuse these components.
 
@@ -14,7 +14,7 @@ While this creates more files overall, it makes each component easier to maintai
   - /lib (component library / design system)
     - /table
       - /table-controls
-        - table-controls.component ()
+        - table-controls.component
       - table.component (wrapper for custom ngx-datatable)
   - /users (business feature/page)
     - /add-new-users
@@ -23,7 +23,7 @@ While this creates more files overall, it makes each component easier to maintai
 
 ## Data consumption
 
-Data is consumed via the business feature components using a service to separate the HTTP calls to the server, making it easier to test the component.
+Data is consumed via the business feature components (`users.component`) using a service to separate the API calls to the server, making it easier to test the component.
 
 ---
 
